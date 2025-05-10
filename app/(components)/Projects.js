@@ -1,6 +1,7 @@
 import Section from "./Section"
 import SectionHeading from "./SectionHeading"
 import Card from "./Card"
+import { urlFor } from "@/sanity/lib/image";
 
 export default function Projects({ projects }) {
   return (
@@ -13,7 +14,7 @@ export default function Projects({ projects }) {
               key={project.id}
               title={project.title}
               description={project.description}
-              image={project.image}
+              image={urlFor(project?.image?.asset._ref).url()}
               tags={project.tags}
               actions={[
                 { label: "Demo", href: project.demoLink },

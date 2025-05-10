@@ -5,7 +5,7 @@ import Section from "./Section"
 import SectionHeading from "./SectionHeading"
 import Button from "./Button"
 
-export default function Contact({ email, phone, location, socials }) {
+export default function Contact({ email, phone, location, socials,paragraph }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,9 +19,9 @@ export default function Contact({ email, phone, location, socials }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission (would connect to a server action in a real app)
+   
     console.log(formData)
-    alert("Message sent! (This is a demo)")
+    alert("Message sent!")
     setFormData({ name: "", email: "", message: "" })
   }
 
@@ -32,8 +32,7 @@ export default function Contact({ email, phone, location, socials }) {
         <div className="grid md:grid-cols-2 gap-12">
           <div>
             <p className="text-lg text-gray-700 mb-8">
-              I'm currently available for freelance work. If you have a project that you want to get started, think you
-              need my help with something, or just want to say hello, then get in touch.
+              {paragraph}
             </p>
             <div className="space-y-4 mb-8">
               <p className="flex items-center gap-2">
@@ -58,8 +57,10 @@ export default function Contact({ email, phone, location, socials }) {
                   {social.name}
                 </a>
               ))}
+
             </div>
           </div>
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="block mb-2 text-sm font-medium">

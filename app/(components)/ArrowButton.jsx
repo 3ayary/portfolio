@@ -1,4 +1,4 @@
-const ArrowButton = () => {
+const ArrowButton = ({text}) => {
   return (
     <button
       className={`flex items-center justify-center 
@@ -11,7 +11,7 @@ const ArrowButton = () => {
               hover:animate-jello-vertical origin-left`
             }
     >
-      <span className="text-sm font-bold tracking-wide">Discover</span>
+      <span className="text-sm font-bold tracking-wide">{text}</span>
       <span className="pt-0.5 h-full w-auto">
         <svg
           xmlns="http://www.w3.org/2000/svg"

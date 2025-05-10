@@ -5,14 +5,16 @@ import Projects from "./(components)/Projects";
 import Skills from "./(components)/Skills";
 import Contact from "./(components)/Contact";
 import { client } from "@/sanity/lib/client";
-import { HeroSchema,AboutSchema,projectSchema } from "@/sanity/lib/queries";
+import { HeroSchema,AboutSchema,projectSchema, skillsSchema,contactSchema } from "@/sanity/lib/queries";
 import { useEffect, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 
 export default function Home() {
   const [heroData, setHeroData] = useState([]);
   const [aboutData, setAboutData] = useState();
-const [projectsData, setProjectsData] = useState([]);
+const [projectsData, setProjectsData] = useState();
+const [skillsData, setSkillsData] = useState();
+const [contactData, setContactData] = useState();
 
   useEffect(() => {
     const fetcHerohData = async () => {
@@ -32,12 +34,27 @@ const [projectsData, setProjectsData] = useState([]);
       const data = await client.fetch(query);
       setProjectsData(data);
     }
+
+    const fetchSkillsData = async () => {
+      const query = skillsSchema;
+      const data = await client.fetch(query);
+      setSkillsData(data);
+    }
+    const fetchContactData = async () => {
+      const query = contactSchema;
+      const data = await client.fetch(query);
+      setContactData(data);
+    };
+
     fetcHerohData();
     fetchAboutData();
     fetchProjectsData();
+    fetchSkillsData();
+    fetchContactData();
   }, []);
-
-  console.log("print" +aboutData?.highlights);
+{contactData?.socials &&
+  console.log("print"+contactData?.socials[0]?.name)
+}
 
   return (
     <main className="min-h-screen">
@@ -47,7 +64,7 @@ const [projectsData, setProjectsData] = useState([]);
         description={heroData?.description}
       />
 {
-  aboutData?.Image.asset._ref && aboutData?.Image.asset._ref &&
+  aboutData?.Image.asset._ref && 
       <About
       image={
           aboutData?.highlights &&
@@ -57,40 +74,27 @@ const [projectsData, setProjectsData] = useState([]);
         highlights={aboutData?.highlights}
       />
 }
-      {/* <Projects
+
+{projectsData?.projects &&
+      <Projects
         projects={projectsData?.projects}
-      /> */}
-
-
-      <Skills
-        categories={[
-          {
-            name: "Frontend",
-            skills: [
-              "HTML",
-              "CSS",
-              "JavaScript",
-              "React",
-              "Next.js",
-              "Tailwind CSS",
-            ],
-          },
-          {
-            name: "Tools",
-            skills: ["Git", "GitHub", "VS Code", "Figma", "Postman"],
-          },
-        ]}
       />
+
+}
+      { skillsData?.categories &&
+        <Skills
+        categories={skillsData?.categories}
+      /> }
+
+{
+      contactData?.socials&&
       <Contact
-        email="john.doe@example.com"
-        phone="+1 (555) 123-4567"
-        location="San Francisco, CA"
-        socials={[
-          { name: "GitHub", url: "https://github.com" },
-          { name: "LinkedIn", url: "https://linkedin.com" },
-          { name: "Twitter", url: "https://twitter.com" },
-        ]}
-      />
+        email={contactData?.email}
+        phone={contactData?.phone}
+        location={contactData?.location}
+        paragraph={contactData?.paragraph}
+        socials={contactData?.socials}
+      />}
     </main>
   );
 }
