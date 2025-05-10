@@ -3,7 +3,7 @@ import Button from "./Button"
 
 export default function Card({ title, description, image, tags, actions }) {
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md w-[400px] transition-shadow">
       <div className="relative h-48">
         <Image src={image || "/placeholder.svg"} alt={title} fill className="object-cover w-[300px] h-[300px]" />
       </div>

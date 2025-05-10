@@ -14,11 +14,6 @@ export const projectSchema = defineType({
           type: "object",
           fields: [
             {
-              name: "id",
-              title: "ID",
-              type: "number",
-            },
-            {
               name: "title",
               title: "Title",
               type: "string",
