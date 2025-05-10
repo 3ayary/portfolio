@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className=" flex flex-row justify-between  w-full h-16 bg-slate-800 text-white px-10 shadow-md sticky top-0 z-10">
       <div className="flex flex-row gap-2 items-center">
-          <Link href="#" className="text-lg hover:text-gray-300">
+          <Link href="#home" className="text-lg hover:text-gray-300">
             <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
