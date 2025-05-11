@@ -1,9 +1,9 @@
 "use client";
-import Hero from "./(components)/Hero";
-import About from "./(components)/About";
-import Projects from "./(components)/Projects";
-import Skills from "./(components)/Skills";
-import Contact from "./(components)/Contact";
+import Hero from "../(components)/Hero";
+import About from "../(components)/About";
+import Projects from "../(components)/Projects";
+import Skills from "../(components)/Skills";
+import Contact from "../(components)/Contact";
 import { client } from "@/sanity/lib/client";
 import { HeroSchema,AboutSchema,projectSchema, skillsSchema,contactSchema } from "@/sanity/lib/queries";
 import { useEffect, useState } from "react";
@@ -52,16 +52,19 @@ const [contactData, setContactData] = useState();
     fetchSkillsData();
     fetchContactData();
   }, []);
-{contactData?.socials &&
-  console.log("print"+contactData?.socials[0]?.name)
-}
 
+
+projectsData && console.log("print result : ",projectsData[0]);
+
+
+     
+ 
   return (
     <main className="min-h-screen">
       <Hero
         name={heroData?.name}
         title={heroData?.title}
-        description={heroData?.description}
+        description={heroData?.title}
       />
 {
   aboutData?.Image.asset._ref && 
@@ -75,12 +78,13 @@ const [contactData, setContactData] = useState();
       />
 }
 
-{projectsData?.projects &&
-      <Projects
-        projects={projectsData?.projects}
-      />
+{projectsData && projectsData.length > 0 && (
+  <Projects projects={projectsData} />
+)}
 
-}
+
+
+
       { skillsData?.categories &&
         <Skills
         categories={skillsData?.categories}

@@ -1,7 +1,8 @@
-import Section from "./Section"
-import SectionHeading from "./SectionHeading"
-import Card from "./Card"
+import Section from "./Section";
+import SectionHeading from "./SectionHeading";
+import Card from "./Card";
 import { urlFor } from "@/sanity/lib/image";
+import Link from "next/link";
 
 export default function Projects({ projects }) {
   return (
@@ -10,21 +11,25 @@ export default function Projects({ projects }) {
         <SectionHeading>My Projects</SectionHeading>
         <div className="flex flex-wrap justify-center gap-4">
           {projects.map((project) => (
-            <Card
-              
+          <Link href={`/${project.slug.current}`} key={project._id}>
+           <Card
               key={project._id}
               title={project.title}
               description={project.description}
-              image={urlFor(project?.image?.asset._ref).url()}
-              tags={project.tags}
+              image={
+                project?.image?.asset? urlFor(project.image.asset._ref).url() : ""
+              }
+              tags={project.tags} 
               actions={[
                 { label: "Demo", href: project.demoLink },
                 { label: "Code", href: project.codeLink },
               ]}
             />
+          </Link>
+         
           ))}
         </div>
       </div>
     </Section>
-  )
+  );
 }
